@@ -1,0 +1,7 @@
+# Haskell / Stack
+**/.stack-work/
+*.sqlite3
+
+# Node
+**/node_modules/
+EOF
