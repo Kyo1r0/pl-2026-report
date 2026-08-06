@@ -1,13 +1,23 @@
-# 期末レポートテンプレート
+# 【課題C】 Webアプリ：Node.js vs. Yesod
 
-* 課題Xに対応するレポートテンプレート `ReportX.md` 
-* レポートの置き方は2通り：
-  + リポジトリ全体がレポートである場合：リポジトリのトップレベルの `README.md`
-  + 既存リポジトリを改変してレポートを執筆する場合： `report/README.md`
-* テンプレート中の箇条書きはコメントなのでレポートからは削除すべし
-* [GitHub Flavored Markdown](https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)を適切に用いるべし
-  + [LaTeX数式も使える](https://docs.github.com/ja/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions)ことに留意する
-* 見出しは適宜追加してよい
-  + 特に第3レベルの見出し `###` は適宜テンプレートに追加することが望ましい
-* テンプレートに指定されていないことも適宜記述してよい
-  + 適切な見出しを与えて構造化すること
+## [Node.js](https://nodejs.org/ja)
+
+* 最新の[Node.js](https://nodejs.org/ja)を概説
+* 具体例を示す
+
+## [Yesod](https://www.yesodweb.com/)
+
+* 最新の[Yesod](https://www.yesodweb.com/)を概説
+* 具体例を示す
+
+## Webアプリ例
+
+* 実装したWebアプリを概説
+* 後述の比較を念頭に説明すること
+
+## Node.js/TypeScript vs. Yesod/Haskell
+
+* 前述のWebアプリの例を念頭に，Node.jsとYesod，TypeScriptとHaskellを比較する
+* 違いに対する評価も必要
+
+## 参考文献
