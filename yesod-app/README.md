@@ -17,6 +17,12 @@ stack exec -- yesod devel
 
 As your code changes, your site will be automatically recompiled and redeployed to localhost.
 
+### 追記
+コマンドが無いよと言われたとき
+```
+source ~/.ghcup/env
+```
+
 ## Tests
 
 ```
