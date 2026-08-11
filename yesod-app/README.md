@@ -23,6 +23,8 @@ As your code changes, your site will be automatically recompiled and redeployed 
 source ~/.ghcup/env
 ```
 
+stack runghc app/helloworld.hs
+
 ## Tests
 
 ```
