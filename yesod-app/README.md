@@ -24,6 +24,7 @@ source ~/.ghcup/env
 ```
 
 stack runghc app/helloworld.hs
+stack exec -- yesod devel
 
 ## Tests
 

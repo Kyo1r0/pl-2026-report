@@ -1,13 +1,25 @@
-h2##{aDomId} {
-    color: #990
+.container {
+    max-width: 600px;
+    margin: 2em auto;
+    font-family: sans-serif;
+    padding: 0 1em;
+}
+
+h1 {
+    color: #333;
+}
+
+h2 {
+    color: #990;
+    margin-top: 1.5em;
+}
+
+textarea, input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 li {
     line-height: 2em;
-    font-size: 16px
-}
-
-##{commentTextareaId} {
-    width: 400px;
-    height: 100px;
+    font-size: 16px;
 }
