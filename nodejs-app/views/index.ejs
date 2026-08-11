@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>一言掲示板</title>
+  <style>
+    .container { max-width: 600px; margin: 2em auto; font-family: sans-serif; padding: 0 1em; }
+    h1 { color: #333; }
+    h2 { color: #990; margin-top: 1.5em; }
+    input[type=text] { width: 100%; box-sizing: border-box; }
+    li { line-height: 2em; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>一言掲示板</h1>
+
+    <h2>投稿する</h2>
+    <form method="post" action="/">
+      <input type="text" name="message" placeholder="メッセージを入力">
+      <button type="submit">投稿</button>
+    </form>
+
+    <h2>投稿一覧</h2>
+    <% if (comments.length === 0) { %>
+      <p>まだ投稿がありません。</p>
+    <% } else { %>
+      <ul>
+        <% comments.forEach(function(comment) { %>
+          <li><%= comment.message %></li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+</body>
+</html>
