@@ -12,28 +12,28 @@ newtype CommentForm = CommentForm
     { commentFormMessage :: Text
     }
 
--- トップページ（GET）：一覧とフォームを表示
-getHomeR :: Handler Html
-getHomeR = do
+-- 共通：一覧とフォームを表示する処理
+showBoard :: Handler Html
+showBoard = do
     allComments <- runDB getAllComments
     (formWidget, formEnctype) <- generateFormPost commentForm
     defaultLayout $ do
-        setTitle "一言掲示板"
+        setTitle "一言掲示板タイトル"
         $(widgetFile "homepage")
+
+-- トップページ（GET）：一覧とフォームを表示
+getHomeR :: Handler Html
+getHomeR = showBoard
 
 -- 投稿を受け取る（POST）：保存してトップに戻る
 postHomeR :: Handler Html
 postHomeR = do
-    ((result, formWidget), formEnctype) <- runFormPost commentForm
+    ((result, _), _) <- runFormPost commentForm
     case result of
         FormSuccess cf -> do
             _ <- runDB $ insert $ Comment (commentFormMessage cf) Nothing
             redirect HomeR
-        _ -> do
-            allComments <- runDB getAllComments
-            defaultLayout $ do
-                setTitle "一言掲示板"
-                $(widgetFile "homepage")
+        _ -> showBoard
 
 -- フォームの定義（テキスト1つ）
 commentForm :: Form CommentForm
