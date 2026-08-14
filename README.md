@@ -13,8 +13,11 @@ Node.jsでは、Typescriptによって開発を行うこともできる。
 Typescriptはjavascriptに型システムが追加されたPLである。
 プログラミングにおいて、javascriptと異なる点はデータ型を宣言することである。
 これによって、データ型が異なっている場合や間違った使い方をした場合、Typescriptはエラーによって間違いを実行前に知らせることができる。
-
+しかし、必ずしもデータ型を明記する必要はない。データ型を記述しない場合は、文脈や値によって、Typescriptはデータ型を指定する。
 本レポートでは、Typescriptを用いた。
+
+また、expressというフレームワークを開発で用いた。
+expressはNode.jsで実行可能なwebフレームワークである。
 
 
 
@@ -39,4 +42,9 @@ Typescriptはjavascriptに型システムが追加されたPLである。
 - Node.js 公式：https://nodejs.org/ja
 - Node.jsのイントロダクション:https://nodejs.org/learn/getting-started/introduction-to-nodejs
 - Node.jsでのTypescript:https://nodejs.org/learn/typescript/introduction
+- Typescriptにおける方推論:https://www.typescriptlang.org/docs/handbook/type-inference.html
+- expressの説明:https://expressjs.com/ja/
+- expressの具体例:https://expressjs.com/ja/5x/starter/hello-world/
 - Yesod 公式：https://www.yesodweb.com/
+
+
