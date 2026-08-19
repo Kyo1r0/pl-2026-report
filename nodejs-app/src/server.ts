@@ -27,11 +27,17 @@ app.get("/", (req, res) => {
 
 // --- 投稿を受け取る（POST）：保存してトップに戻る ---
 // Yesod の postHomeR に相当
+// app.post("/", (req, res) => {
+//   const message = req.body.message;
+//   if (message) {
+//     db.prepare("INSERT INTO comment (message) VALUES (?)").run(message);
+//   }
+//   res.redirect("/");
+// });
+
 app.post("/", (req, res) => {
-  const message = req.body.message;
-  if (message) {
-    db.prepare("INSERT INTO comment (message) VALUES (?)").run(message);
-  }
+  const message = req.body.mesage;   // ← わざと綴りミス（message → mesage）
+  db.prepare("INSERT INTO comment (message) VALUES (?)").run(message);
   res.redirect("/");
 });
 
