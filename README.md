@@ -27,7 +27,7 @@ expressはNode.jsで実行可能なWebフレームワークである。
 
 トップページを表示する処理は次のようになっている。
 
-```TypeScript
+```typescript
 app.get("/", (req, res) => {
   const comments = db.prepare("SELECT * FROM comment ORDER BY id ASC").all();
   res.render("index", { comments });
@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
 
 投稿を受け取る処理は次のようになっている。
 
-```TypeScript
+```typescript
 app.post("/", (req, res) => {
   const message = req.body.message;
   if (message) {
@@ -208,7 +208,7 @@ Home.hs:34:44: error:
 
 データベースの操作にも、同様の違いが表れる。TypeScript 版では、SQL を文字列として記述する。
 
-```TypeScript
+```typescript
 db.prepare("SELECT * FROM comment ORDER BY id ASC").all();
 ```
 
