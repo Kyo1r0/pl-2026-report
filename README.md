@@ -2,16 +2,16 @@
 
 ## [Node.js](https://nodejs.org/ja)
 
-Node.jsはJavascriptの実行する実行環境である。
-特徴はJavascriptでも、サーバーサイドのプログラミングができる点である。
+Node.jsはJavaScriptの実行する実行環境である。
+特徴はJavaScriptでも、サーバーサイドのプログラミングができる点である。
 これにより、フロントエンドとサーバーサイドを同じ言語で記述できる。
 
 また、Node.jsは頻繁に更新されている。2026年8月時点では、最新版はv26系であり、
 長期サポート版であるLTS版は24系である。本レポートでは、LTS版を用いて開発を行った。
 
 Node.jsでは、TypeScriptによって開発を行うこともできる。
-TypeScriptはJavascriptに型システムが追加されたPLである。
-プログラミングにおいて、Javascriptと異なる点はデータ型を明示的に宣言することができる点である。
+TypeScriptはJavaScriptに型システムが追加されたPLである。
+プログラミングにおいて、JavaScriptと異なる点はデータ型を明示的に宣言することができる点である。
 これによって、データ型が一致しない場合や誤った使い方をした場合、TypeScriptはエラーによって間違いを実行前に知らせることができる。
 しかし、必ずしもデータ型を明記する必要はない。データ型を記述しない場合は、文脈や値によって、データ型を指定する。さらに、TypeScriptがデータ型を推測しない場合、データ型は既定のany型となる。これは型検査を行わないデータ型である。
 
@@ -19,7 +19,7 @@ TypeScriptはJavascriptに型システムが追加されたPLである。
 
 また、expressというフレームワークを開発で用いた。
 expressはNode.jsで実行可能なWebフレームワークである。
-このフレームワークでは、各HTTPメソッドが関数として用意されているため、それに従ってプログラミングすることでwebアプリ開発を行うことができる。さらに、この関数の機能は、Typescritpの文脈依存の型推論を行うため、データ型をコンパイラが指定する。
+このフレームワークでは、各HTTPメソッドが関数として用意されているため、それに従ってプログラミングすることでwebアプリ開発を行うことができる。さらに、この関数の機能は、TypeScriptの文脈依存の型推論を行うため、データ型をコンパイラが指定する。
 
 ### 具体例
 
@@ -27,18 +27,18 @@ expressはNode.jsで実行可能なWebフレームワークである。
 
 トップページを表示する処理は次のようになっている。
 
-```typescript
+```TypeScript
 app.get("/", (req, res) => {
   const comments = db.prepare("SELECT * FROM comment ORDER BY id ASC").all();
   res.render("index", { comments });
 });
 ```
 
-`app.get`は Expressが提供する関数である。第一引数の URL（`"/"`）にGETリクエストが来たときに、第二引数の関数を実行する。この関数の引数`req`（リクエスト）と`res`（レスポンス）にはデータ型を記述していない。しかし、`app.get`に渡す関数という文脈から、TypeScriptが`req`を`Request`型、`res`を`Response`型であると、文脈依存の型推論によって自動的に推論している。
+`app.get`は Expressが提供する関数である。第一引数の URL（`"/"`）にGETリクエストが来たときに、第二引数の関数を実行する。この関数の引数`req`（リクエスト）と`res`（レスポンス）にはデータ型を記述していない。しかし、`app.get`に渡す関数であることから、TypeScriptが`req`を`Request`型、`res`を`Response`型であると、自動的に推論している。
 
 投稿を受け取る処理は次のようになっている。
 
-```typescript
+```TypeScript
 app.post("/", (req, res) => {
   const message = req.body.message;
   if (message) {
@@ -53,25 +53,25 @@ app.post("/", (req, res) => {
 
 ## [Yesod](https://www.yesodweb.com/)
 
-YesodはHakellというPLによって、Webアプリを作成することができるフレームワークである。
+YesodはHaskellというPLによって、Webアプリを作成することができるフレームワークである。
 
-Yesodでは、型安全性と表記の容易さの2点が挙げられる。
-Hakellの型システムでは、外界とやり取りする場合計算効果をモナドという特殊なデータ型を使うことで表現している。これによって、DBとのやり取りやHTTPメソッド等にもデータ型を宣言することができる。
+Yesodでは、型システムの強さと表記の容易さの2点が挙げられる。
+Haskellの型システムでは、外界とやり取りする場合計算効果をモナドという特殊なデータ型を使うことで表現している。これによって、DBとのやり取りやHTTPメソッド等にもデータ型を宣言することができる。
 
 DBを操作したい場合、TypeScriptでは、SQLを書くことでDBを構築し、操作を行う。一方で、Yesodでは、簡単に宣言するだけで自動でDBが構築される。さらに、Yesodが与える関数を記述することで行うことができる。
 
-さらに、この関数はDSLであるが、これもHakellで書かれているため、型検査の対象となる。すなわち、簡潔に書けるだけでなく、記述の誤りをコンパイル時に検出できる。
+さらに、この関数はDSLであるが、これもHaskellで書かれているため、型検査の対象となる。すなわち、簡潔に書けるだけでなく、記述の誤りをコンパイル時に検出できる。
 
 
 
-このように、型安全と簡潔さがYesodの特徴である。
+このように、型システムの扱う範囲の広さと簡潔さがYesodの特徴である。
 
 
 
 
 ### 具体例
 
-型安全と簡潔さについて説明する。
+型システムと簡潔さについて説明する。
 
 
 データベースの構造は `config/models` に次のように記述する。
@@ -105,7 +105,7 @@ getAllComments = selectList [] [Asc CommentId]
 <form method=post action=@{HomeR}>
 ```
 
-`@{HomeR}` のように URL をデータ型として記述するため、存在しないルートを指定するとコンパイル時にエラーとなる。TypeScript 版では送信先を `action="/"` という文字列で記述したのに対し、Yesod では型として扱う点が異なる。
+`@{HomeR}` のように URL をデータ型として記述するため、存在しないルートを指定するとコンパイル時にエラーとなる。TypeScript 版では送信先を `action="/"` という文字列で記述したのに対し、Yesod ではデータ型として扱う点が異なる。
 
 
 
@@ -118,7 +118,7 @@ getAllComments = selectList [] [Asc CommentId]
 - 投稿はデータベースに保存される
 
 このアプリをNode.js/TypeScript 版と Yesod/Haskell 版で実装した。
-### TyepScriptによるWebアプリ
+### TypeScriptによるWebアプリ
 
 前述のとおり、フレームワークはexpressを用いて作成した。
 
@@ -175,7 +175,7 @@ Yesod では、コードをコンパイルしてからアプリが起動する�
 
 
 
-### Node.js/TypeScript vs. Yesod/Haskell
+## Node.js/TypeScript vs. Yesod/Haskell
 
 
 両方の方法で同じ掲示板を実装した。両者異なる点は、入力やDBなどの外部とのやり取りの方法についてである。これらの違いについて考察する。
@@ -188,7 +188,7 @@ TypeScriptでは、送られてきたメッセージが存在するかを `if` �
 
 TypeScript 版では、`message` を `mesage` と誤って記述しても、`req.body` の型が `any` であるためコンパイルは通り、プログラムは起動する。しかし実際に投稿を送信すると、次のように実行時エラーが発生する。
 
-![TypeScript版で発生した実行時エラー](images/typescript-empty-form.png)
+![TypeScript版で発生した実行時エラー](images/TypeScript-empty-form.png)
 
 これはデータベースへの書き込み時に初めて検出されたエラーである。
 
@@ -208,7 +208,7 @@ Home.hs:34:44: error:
 
 データベースの操作にも、同様の違いが表れる。TypeScript 版では、SQL を文字列として記述する。
 
-```typescript
+```TypeScript
 db.prepare("SELECT * FROM comment ORDER BY id ASC").all();
 ```
 
@@ -225,14 +225,14 @@ selectList [] [Asc CommentId]
 
 
 
-### まとめ
+## まとめ
 
-TypeScriptは実際の値に関しては、データ型を付けることができる。しかし、Haskelではこれに加えて外界との関わりである、計算効果にもデータ型を与えることができる。これによって、計算効果での誤りにたいして、Typescriptでは動かしてみないとわからないが、Yesodではビルドの時点で誤りを確認することができる。
+TypeScriptは実際の値に関しては、データ型を付けることができる。しかし、Haskellではこれに加えて外界との関わりである、計算効果にもデータ型を与えることができる。これによって、計算効果での誤りにたいして、TypeScriptでは実行時までわからないが、Yesodではビルドの時点で誤りを確認することができる。
 
-しかし、Yesodではビルドしてから実際にページをみることができるまでにTypescriptに比べて時間がかかる。また、YesodのDSLは簡潔ではあるがSQLをそのまま書くことと比べると直感的ではない。直感的な記法と、Yesodでは主張されているが、DBの操作はSQLが
-一般的である。SQL以外でDBを操作することは、仮に必要な文字列の数が少なく、見た目がより簡潔だとしても新たに覚える必要がある点において直感的ではないだろう。
+しかし、Yesodではビルドしてから実際にページをみることができるまでにTypeScriptに比べて時間がかかる。また、YesodのDSLは簡潔ではあるがSQLをそのまま書くことと比べると馴染みがない。直感的な記法と、Yesodでは主張されているが、DBの操作はSQLが一般的である。SQL以外でDBを操作することは、仮に必要な文字列の数が少なく、見た目がより簡潔だとしても新たに覚える必要がある点において分かりにくいだろう。
 
-以上から、計算効果に対して安全である点は、TypescriptよりもむしろYesodが優れているといえる。また、Typescriptの方がデファクトスタンダードであることに関しては型システムに関してというよりも、むしろルートやSQLを直接書くことの直感的さとnode.jsでも動かすことができるといったようなjavascriptとの連携の良さに起因するといえる。
+
+以上から、コンパイル時に計算効果についての型不整合を防ぐことができるのはYesodである。したがって、TypeScriptでは不整合を防ぐ責任が開発者に委ねられているのに対し、YesodではPL自体がそれを担う。また、TypeScriptの方が広く使われていることに関しては、型システムに関してというよりも、むしろSQLなどを直接書くことの直感的さと、Haskellとは異なり、すでに普及していたJavaScriptの実行環境である Node.js でそのまま動かせるという連携の良さに起因するといえる。
 
 
 
@@ -241,10 +241,10 @@ TypeScriptは実際の値に関しては、データ型を付けることがで�
 - Node.js 公式：https://nodejs.org/ja
 - Node.jsのイントロダクション:https://nodejs.org/learn/getting-started/introduction-to-nodejs
 - Node.jsでのTypeScript:https://nodejs.org/learn/TypeScript/introduction
-- TypeScriptにおける方推論:https://www.TypeScriptlang.org/docs/handbook/type-inference.html
+- TypeScriptにおける型推論:https://www.TypeScriptlang.org/docs/handbook/type-inference.html
 - expressの説明:https://expressjs.com/ja/
 - expressの具体例:https://expressjs.com/ja/5x/starter/hello-world/
-- TypeScript any型:https://learn.microsoft.com/ja-jp/archive/msdn-magazine/2015/january/typescript-understanding-typescript
+- TypeScript any型:https://learn.microsoft.com/ja-jp/archive/msdn-magazine/2015/january/TypeScript-understanding-TypeScript
 - Yesod 公式：https://www.yesodweb.com/
 - Yesod 本:https://www.yesodweb.com/book
 - Yesod イントロダクション:https://www.yesodweb.com/book/introduction
